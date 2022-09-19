@@ -15,19 +15,29 @@ import "./style.css";
 
 let btnNew = document.querySelector('.popup__body--btn__new')
 btnNew.onclick = () => {
-  gameStart()
+  tgames.showRewardedAd();
+  //alert('Ad')
+  gameStart();
 }
 
 let btnShare = document.querySelector('.popup__body--btn__share')
 btnShare.onclick = () => {
-  tgames.share()
+  tgames.share();
 }
 
 let btnRestart = document.querySelector('.popup__body--btn__restart')
 btnRestart.onclick = () => {
-  gameStart()
+  tgames.showRewardedAd();
+  //alert('Ad')
+  gameStart();
 }
 
+let btnStart = document.querySelector('.popup__body--btn__start')
+btnStart.onclick = () => {
+  gameStart();
+  let popupStart = document.querySelector('.popup__start');
+  popupStart.style.display = 'none';
+}
 
 function gameStart() {
   window.game = new Game(4);
@@ -195,7 +205,7 @@ Game.prototype.gameWon = function () {
   popup.style.display = 'flex';
   alert("you won");
   tgames.gameOver( game.score )
-  tgames.showRewardedAd();
+  //tgames.showRewardedAd();
 };
 /**/
 
@@ -210,7 +220,7 @@ Game.prototype.gameLost = function () {
   let popup = document.querySelector('.popup');
   popup.style.display = 'flex';
   tgames.gameOver( game.score )
-  tgames.showRewardedAd();
+  //tgames.showRewardedAd();
   alert('What a loser?!')
 
 };
@@ -306,6 +316,8 @@ Game.prototype.TileMerge = function () {
       x.el.remove();
       // update score
       newScore += currentValue;
+      tgames.setScore( newScore )
+      //alert( newScore )
     }
   });
   // update game score at the end
