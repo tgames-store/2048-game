@@ -16,7 +16,6 @@ import "./style.css";
 let btnNew = document.querySelector('.popup__body--btn__new')
 btnNew.onclick = () => {
   tgames.showRewardedAd();
-  //alert('Ad')
   gameStart();
 }
 
@@ -45,6 +44,7 @@ function gameStart() {
   window.game.initialize();
   let popup = document.querySelector('.popup');
   popup.style.display = 'none';
+  game.flag = true;
 }
 $(document).ready(gameStart);
 
@@ -300,8 +300,10 @@ Game.prototype.getRandomEmptyCell = function () {
  * Merge tiles
  */
 Game.prototype.TileMerge = function () {
-  //alert('here');
-  tgames.gameStarted()
+  if(game.flag){
+    tgames.gameStarted();
+    game.flag = false
+  }
   var gameBoard = this.boardFlatten();
   var newScore = this.score;
 
