@@ -27,6 +27,7 @@ btnShare.onclick = () => {
 
 let btnRestart = document.querySelector('.popup__body--btn__restart')
 btnRestart.onclick = () => {
+  tgames.gameOver( game.score )
   tgames.showRewardedAd();
   //alert('Ad')
   gameStart();
@@ -44,7 +45,6 @@ function gameStart() {
   window.game.initialize();
   let popup = document.querySelector('.popup');
   popup.style.display = 'none';
-  tgames.gameStarted()
 }
 $(document).ready(gameStart);
 
@@ -235,7 +235,6 @@ Game.prototype.isGameOver = function () {
   var is2048 = false;
   var canAnyTileMove = false;
   var hasEmptyCells = false;
-
   // check if 2048
   gameBoard.forEach(function (val, index, array) {
     val.tilesArray.forEach(function (val, index, array) {
@@ -301,6 +300,8 @@ Game.prototype.getRandomEmptyCell = function () {
  * Merge tiles
  */
 Game.prototype.TileMerge = function () {
+  //alert('here');
+  tgames.gameStarted()
   var gameBoard = this.boardFlatten();
   var newScore = this.score;
 
