@@ -17,6 +17,7 @@ let btnNew = document.querySelector('.popup__body--btn__new')
 btnNew.onclick = () => {
   tgames.showRewardedAd();
   gameStart();
+  tgames.gameStarted();
 }
 
 let btnShare = document.querySelector('.popup__body--btn__share')
@@ -28,13 +29,14 @@ let btnRestart = document.querySelector('.popup__body--btn__restart')
 btnRestart.onclick = () => {
   tgames.gameOver( game.score )
   tgames.showRewardedAd();
-  //alert('Ad')
   gameStart();
+  tgames.gameStarted();
 }
 
 let btnStart = document.querySelector('.popup__body--btn__start')
 btnStart.onclick = () => {
   gameStart();
+  tgames.gameStarted();
   let popupStart = document.querySelector('.popup__start');
   popupStart.style.display = 'none';
 }
@@ -44,7 +46,6 @@ function gameStart() {
   window.game.initialize();
   let popup = document.querySelector('.popup');
   popup.style.display = 'none';
-  game.flag = true;
 }
 $(document).ready(gameStart);
 
@@ -300,10 +301,6 @@ Game.prototype.getRandomEmptyCell = function () {
  * Merge tiles
  */
 Game.prototype.TileMerge = function () {
-  if(game.flag){
-    tgames.gameStarted();
-    game.flag = false
-  }
   var gameBoard = this.boardFlatten();
   var newScore = this.score;
 
